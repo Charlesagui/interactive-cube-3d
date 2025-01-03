@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.scene {
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    /* Eliminamos la animación CSS previa y la gestionamos con JS */
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    pointer-events: auto;
+}
+
+.face:active {
+    cursor: grabbing;
+}
+
+.face:hover {
+    opacity: 1;
+}
+
+/* Mapeamos cada cara con su transform inicial y su imagen de fondo */
+.front {
+    transform: rotateY(0deg) translateZ(100px);
+    background-image: url("/images/random1.jpg");
+}
+.right {
+    transform: rotateY(90deg) translateZ(100px);
+    background-image: url("/images/random2.jpg");
+}
+.back {
+    transform: rotateY(180deg) translateZ(100px);
+    background-image: url("/images/random3.jpg");
+}
+.left {
+    transform: rotateY(-90deg) translateZ(100px);
+    background-image: url("/images/random4.jpg");
+}
+.top {
+    transform: rotateX(90deg) translateZ(100px);
+    background-image: url("/images/random5.jpg");
+}
+.bottom {
+    transform: rotateX(-90deg) translateZ(100px);
+    background-image: url("/images/random6.png");
+}
