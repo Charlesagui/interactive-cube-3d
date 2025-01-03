@@ -4,37 +4,43 @@ let isDragging = false;
 let startX, startY, prevX, prevY;
 let rotationX = 0, rotationY = 0;
 
-// Velocidad en los ejes X e Y (rotación).
+// Velocidad de rotación manual (inercia al arrastrar)
 let velocityX = 0;
 let velocityY = 0;
 
-// Factor que multiplica el delta del mouse para convertirlo en velocidad de giro.
-const velocityFactor = 0.2;
+// Velocidad de rotación automática (siempre presente)
+// Ajusta este valor para que rote más rápido o más lento sobre el eje Y
+const autoRotateY = 0.1;
 
-// Factor de fricción para que la inercia se vaya reduciendo con el tiempo.
-// Ajusta este valor para incrementar o reducir la desaceleración.
-const friction = 0.95; 
+// Factores para la inercia
+const velocityFactor = 0.2; // Sensibilidad al arrastrar
+const friction = 0.95;      // Fricción (cuanto más cerca de 1, más tarda en frenarse)
 
-// Animación continua via requestAnimationFrame
+// Animación continua con requestAnimationFrame
 function animate() {
-  // Actualizamos la rotación con la velocidad actual
+  // Sumamos la inercia del arrastre (velocityX, velocityY) y la rotación automática (autoRotateY)
   rotationX += velocityX;
-  rotationY += velocityY;
-  
-  // Aplicamos fricción a la velocidad para ir reduciéndola gradualmente.
+  rotationY += velocityY + autoRotateY;
+
+  // Aplicamos fricción para ir reduciendo la velocidad de arrastre gradualmente
   velocityX *= friction;
   velocityY *= friction;
-  
-  // Aplicamos la transformación al cubo
+
+  // Reflejamos la transformación en el cubo
   cube.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
 
   requestAnimationFrame(animate);
 }
-
-// Iniciamos la animación
 requestAnimationFrame(animate);
 
-// Doble clic para navegar al enlace de la cara
+// Evitamos que un clic abra el enlace por accidente
+cube.addEventListener('click', (e) => {
+  if (e.target.tagName.toLowerCase() === 'a') {
+    e.preventDefault();
+  }
+});
+
+// Con doble clic, sí abrimos el enlace
 cube.addEventListener('dblclick', (e) => {
   e.preventDefault();
   if (e.target.tagName.toLowerCase() === 'a') {
@@ -42,64 +48,51 @@ cube.addEventListener('dblclick', (e) => {
   }
 });
 
-// Al presionar el ratón, comenzamos el arrastre
+// Mousedown: comenzamos el arrastre
 cube.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX;
   startY = e.clientY;
   prevX = e.clientX;
   prevY = e.clientY;
-
-  // Detenemos el impulso anterior (si queremos que inicie nuevo arrastre
-  // sin sumar la velocidad antigua, podemos poner velocityX=0, velocityY=0)
-  // velocityX = 0;
-  // velocityY = 0;
-
   e.preventDefault();
 });
 
-// Durante el arrastre (mousemove), calculamos cuánto se mueve el cursor
+// Mousemove: rotación manual con arrastre
 document.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
 
   const currentX = e.clientX;
   const currentY = e.clientY;
-  
   const deltaX = currentX - prevX;
   const deltaY = currentY - prevY;
 
-  // Actualizamos la velocidad (que luego aplicaremos en el bucle de animación)
+  // Ajustamos la velocidad según el movimiento
   velocityY = deltaX * velocityFactor;
   velocityX = -deltaY * velocityFactor;
 
-  // Actualizamos las rotaciones inmediatamente para que el usuario
-  // vea el movimiento en tiempo real
+  // Rotamos el cubo inmediatamente para retroalimentación visual en tiempo real
   rotationX += velocityX;
   rotationY += velocityY;
-  
-  // Asignamos la transformación resultante al cubo
+
   cube.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
 
   prevX = currentX;
   prevY = currentY;
-
   e.preventDefault();
 });
 
-// Cuando el usuario suelta el ratón (mouseup), dejamos de arrastrar.
-// Pero el cubo sigue rotando con la inercia registrada (velocityX, velocityY).
-document.addEventListener('mouseup', (e) => {
+// Cuando el usuario suelta el ratón, se detiene el arrastre, 
+// pero el cubo sigue con la inercia y la rotación automática
+document.addEventListener('mouseup', () => {
   if (isDragging) {
     isDragging = false;
   }
 });
 
-// Si el ratón sale de la ventana, dejamos de arrastrar
+// Si el mouse sale de la ventana, detenemos el arrastre
 document.addEventListener('mouseleave', () => {
   if (isDragging) {
     isDragging = false;
   }
 });
-
-
-/* testeo */
