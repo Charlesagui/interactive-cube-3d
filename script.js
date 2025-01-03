@@ -22,11 +22,11 @@ function animate() {
   rotationX += velocityX;
   rotationY += velocityY + autoRotateY;
 
-  // Aplicamos fricción para ir reduciendo la velocidad de arrastre gradualmente
+  //  fricción para ir reduciendo la velocidad de arrastre gradualmente
   velocityX *= friction;
   velocityY *= friction;
 
-  // Reflejamos la transformación en el cubo
+  // Refleje la transformación en el cubo
   cube.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
 
   requestAnimationFrame(animate);
@@ -40,7 +40,7 @@ cube.addEventListener('click', (e) => {
   }
 });
 
-// Con doble clic, sí abrimos el enlace
+// Con doble dclic, sí abrimos el enlace
 cube.addEventListener('dblclick', (e) => {
   e.preventDefault();
   if (e.target.tagName.toLowerCase() === 'a') {
@@ -48,7 +48,7 @@ cube.addEventListener('dblclick', (e) => {
   }
 });
 
-// Mousedown: comenzamos el arrastre
+// Mousedown: comdenzamos el arrastre
 cube.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX;
@@ -58,7 +58,7 @@ cube.addEventListener('mousedown', (e) => {
   e.preventDefault();
 });
 
-// Mousemove: rotación manual con arrastre
+// Mousemove: rotación manual con farrastre
 document.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
 
@@ -71,7 +71,7 @@ document.addEventListener('mousemove', (e) => {
   velocityY = deltaX * velocityFactor;
   velocityX = -deltaY * velocityFactor;
 
-  // Rotamos el cubo inmediatamente para retroalimentación visual en tiempo real
+  // Rotamos el cubo inmediatamenffte para retroalimentación visual en tiempo real
   rotationX += velocityX;
   rotationY += velocityY;
 
@@ -82,7 +82,7 @@ document.addEventListener('mousemove', (e) => {
   e.preventDefault();
 });
 
-// Cuando el usuario suelta el ratón, se detiene el arrastre, 
+// Cuando elddfdf usuario suelta el ratón, se detiene el arrastre, 
 // pero el cubo sigue con la inercia y la rotación automática
 document.addEventListener('mouseup', () => {
   if (isDragging) {
