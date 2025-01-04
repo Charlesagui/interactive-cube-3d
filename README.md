@@ -1,10 +1,14 @@
 ### 🧊 Cubo 3D Interactivo
-![Demo del cubo](https://github.com/user-attachments/assets/5cfcfa2d-0155-4e1c-83f6-339c2b78bc67)
+
 
 Un cubo 3D que rota automáticamente y permite interactuar con él:
 
 🌍 Rotación automática alrededor de su eje Y.  
 🖱️ Arrastra y suelta para rotarlo manualmente.  
+
+https://github.com/user-attachments/assets/da5d5d5e-cf7a-4c62-9937-29f54ae96f61
+
+
 ⚡ Inercia: el cubo sigue moviéndose al soltar el ratón.  
 🔗 Doble clic en una cara para abrir el enlace asociado.  
 
