@@ -20,3 +20,4 @@ https://github.com/user-attachments/assets/da5d5d5e-cf7a-4c62-9937-29f54ae96f61
 ### 🚀 Uso
 1. Abre el proyecto con un servidor local (*Live Server* recomendado).  
 2. Explora, rota y haz doble clic para navegar.
+3. El enlace asociado se puede personalizar
