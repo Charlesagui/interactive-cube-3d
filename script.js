@@ -4,7 +4,7 @@ let isDragging = false;
 let startX, startY, prevX, prevY;
 let rotationX = 0, rotationY = 0;
 
-// Velocidad de rotación manual (inercia al arrastrar)
+// Veeelocidad de rotación manual (inercia al arrastrar)
 let velocityX = 0;
 let velocityY = 0;
 
